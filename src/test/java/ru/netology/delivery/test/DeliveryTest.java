@@ -1,8 +1,8 @@
 package ru.netology.delivery.test;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
 import ru.netology.delivery.data.DataGenerator;
 
@@ -20,6 +20,17 @@ class DeliveryTest {
     private static final String SUCCESS_NOTIFICATION_CONTENT = "Встреча успешно запланирована на ";
     private static final String REPLAN_NOTIFICATION_TITLE = "Необходимо подтверждение";
     private static final String REPLAN_NOTIFICATION_BUTTON_TEXT = "Перепланировать";
+
+    @BeforeAll
+    static void setupAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
+    }
 
     @BeforeEach
     void setup() {
